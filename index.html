@@ -6,9 +6,23 @@
   <title>DataFWD | The Data Science Portfolio Club</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23000000'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='900' font-size='18' fill='%238AFF20'>D</text></svg>">
   <meta name="description" content="Join peer-led squads to build, review code, and ship high-impact data science projects. The social layer for data leaders.">
+  <!-- SEO -->
+  <link rel="canonical" href="https://datafwd.netlify.app/">
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://datafwd.netlify.app/">
+  <meta property="og:title"       content="DataFWD | The Data Science Portfolio Club">
+  <meta property="og:description" content="Join peer-led squads to build, review code, and ship high-impact data science projects. The social layer for data leaders.">
+  <meta property="og:image"       content="https://datafwd.netlify.app/og-image.png">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="DataFWD | The Data Science Portfolio Club">
+  <meta name="twitter:description" content="Join peer-led squads to build, review code, and ship high-impact data science projects.">
+  <meta name="twitter:image"       content="https://datafwd.netlify.app/og-image.png">
+  <!-- Fonts & perf -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4" defer></script>
   <link rel="stylesheet" href="https://unpkg.com/lucide-static@latest/font/lucide.css">
   <style>
     /* ═══════ RESET & BASE ═══════ */
@@ -633,7 +647,7 @@
       </div>
       <div class="footer-bottom">
         <span class="footer-status">SYSTEM_STATUS: <span>OPTIMAL</span> // v2.4.0</span>
-        <span>&copy; <script>document.write(new Date().getFullYear())</script> DataFWD Club.</span>
+        <span>&copy; <span id="copyrightYear"></span> DataFWD Club.</span>
       </div>
     </div>
   </footer>
@@ -649,7 +663,8 @@
    APP STATE & NAVIGATION
    ═══════════════════════════════════════════════════════ */
 let currentPage = 'home';
-let isDark = true;
+let isDark = localStorage.getItem('theme') !== 'light';
+let feedInterval = null;
 
 function navigate(page) {
   currentPage = page;
@@ -668,6 +683,7 @@ function navigate(page) {
 
 function toggleTheme() {
   isDark = !isDark;
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
   document.body.dataset.theme = isDark ? 'dark' : 'light';
   document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';
   document.getElementById('themeBtnMobile').textContent = isDark ? '☀️' : '🌙';
@@ -824,7 +840,7 @@ function renderFeed() {
   `).join('');
 }
 
-setInterval(() => {
+feedInterval = setInterval(() => {
   feedItems = [feedMsgs[Math.floor(Math.random() * feedMsgs.length)], ...feedItems.slice(0, 4)];
   renderFeed();
 }, 4000);
@@ -1004,6 +1020,31 @@ function initReveals() {
    INIT
    ═══════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+  // Apply persisted theme
+  document.body.dataset.theme = isDark ? 'dark' : 'light';
+  const themeIcon = isDark ? '☀️' : '🌙';
+  document.getElementById('themeBtn').textContent = themeIcon;
+  document.getElementById('themeBtnMobile').textContent = themeIcon;
+
+  // Copyright year
+  const yr = document.getElementById('copyrightYear');
+  if (yr) yr.textContent = new Date().getFullYear();
+
+  // Wire up nav event listeners
+  document.querySelector('.nav-logo').addEventListener('click', () => navigate('home'));
+  document.querySelectorAll('.nav-link[data-page]').forEach(btn =>
+    btn.addEventListener('click', () => navigate(btn.dataset.page)));
+  document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+  document.getElementById('themeBtnMobile').addEventListener('click', toggleTheme);
+  document.querySelector('.nav-join').addEventListener('click', openModal);
+  document.getElementById('menuBtn').addEventListener('click', toggleDrawer);
+  document.querySelectorAll('.nav-drawer button[data-page]').forEach(btn =>
+    btn.addEventListener('click', () => { navigate(btn.dataset.page); }));
+  document.querySelector('.nav-drawer .join-btn').addEventListener('click', () => { openModal(); toggleDrawer(); });
+  document.querySelector('.modal-bg').addEventListener('click', closeModal);
+  document.querySelector('.modal-close').addEventListener('click', closeModal);
+  document.getElementById('showModal').querySelector('.modal-bg').addEventListener('click', closeShowModal);
+
   updateHeroDecorations();
   updateNotifDot();
   initChart();
