@@ -74,13 +74,21 @@
     .btn { display: inline-block; background: var(--blue); color: #fff; padding: 14px 32px; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; }
     .btn:hover { text-decoration: none; opacity: .9; }
     .divider { height: 1px; background: var(--bd); margin: 40px 0; }
+    .related { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--bd); }
+    .related h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--tx); margin-bottom: 24px; }
+    .related-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 640px) { .related-grid { grid-template-columns: 1fr 1fr; } }
+    .related-card { background: var(--bg-card); border: 1px solid var(--bd); border-radius: 12px; padding: 20px; text-decoration: none; display: block; transition: border-color .2s; }
+    .related-card:hover { border-color: var(--acc); text-decoration: none; }
+    .related-tag { font-size: 10px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; letter-spacing: 1.5px; text-transform: uppercase; color: var(--acc); margin-bottom: 8px; display: block; }
+    .related-title { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; color: var(--tx); line-height: 1.4; }
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo" style="text-decoration:none">DATAFWD<span>></span></a>
-      <a href="/#blog" class="nav-back" onclick="history.back(); return false;">← Back to Blog</a>
+      <a href="https://datafwd.space/#blog" class="nav-back">← Back to Blog</a>
     </div>
   </nav>
 
@@ -153,6 +161,24 @@
         <h3>Get your project reviewed before you ship it</h3>
         <p>DataFWD squads give you the peer review, accountability, and honest feedback that turns a good project into a great one.</p>
         <a href="/" class="btn">Join DataFWD Free →</a>
+      </div>
+
+      <div class="related">
+        <h3>More from DataFWD</h3>
+        <div class="related-grid">
+          <a href="/blog/data-science-portfolio-2026.html" class="related-card">
+            <span class="related-tag">Career</span>
+            <div class="related-title">How to Build a Data Science Portfolio That Gets You Hired in 2026</div>
+          </a>
+          <a href="/blog/data-science-team-sport.html" class="related-card">
+            <span class="related-tag">Community</span>
+            <div class="related-title">Why Data Science Is a Team Sport (And How to Find Your Squad)</div>
+          </a>
+          <a href="/blog/founder-moshood-lawal.html" class="related-card">
+            <span class="related-tag">Founder Story</span>
+            <div class="related-title">From Driving Lessons to Data Science: The Story Behind DataFWD</div>
+          </a>
+        </div>
       </div>
 
     </div>

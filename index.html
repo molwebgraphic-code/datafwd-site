@@ -699,6 +699,19 @@
             </div>
           </a>
 
+          <a href="/blog/founder-moshood-lawal.html" class="blog-card reveal">
+            <div class="blog-banner" style="background:linear-gradient(90deg,#f59e0b,#8AFF20)"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-tag">Founder Story</div>
+              <div class="blog-card-title">From Driving Lessons to Data Science: The Story Behind DataFWD</div>
+              <div class="blog-card-excerpt">Moshood Lawal built a data system to pass his UK driving test — and realised the same feedback problem existed everywhere in learning. This is the story behind DataFWD.</div>
+              <div class="blog-card-meta">
+                <span>Apr 3, 2026 · 5 min read</span>
+                <span class="blog-card-read">Read →</span>
+              </div>
+            </div>
+          </a>
+
         </div>
       </div>
     </section>
@@ -1143,6 +1156,12 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFeatured();
   renderShowcase();
   initReveals();
+
+  // Navigate to blog if coming back from a blog post
+  if (window.location.hash === '#blog') {
+    navigate('blog');
+    history.replaceState(null, '', '/');
+  }
 });
 </script>
 </body>
