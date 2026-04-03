@@ -345,6 +345,20 @@
     .footer-status { font-family: monospace; }
     .footer-status span { color: var(--acc); }
 
+    /* ═══════ BLOG ═══════ */
+    .blog-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
+    @media (min-width: 768px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .blog-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .blog-card { background: var(--bg-card); border: 1px solid var(--bd); border-radius: 18px; overflow: hidden; transition: transform .2s, border-color .2s; cursor: pointer; text-decoration: none; display: block; }
+    .blog-card:hover { transform: translateY(-4px); border-color: var(--acc); }
+    .blog-card-tag { display: inline-block; font-size: 11px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; letter-spacing: 1.5px; text-transform: uppercase; color: var(--acc); background: var(--acc-bg); border: 1px solid var(--acc-bd); border-radius: 6px; padding: 3px 10px; margin-bottom: 14px; }
+    .blog-card-body { padding: 28px; }
+    .blog-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--tx); line-height: 1.35; margin-bottom: 12px; }
+    .blog-card-excerpt { font-size: 14px; color: var(--tx2); line-height: 1.7; margin-bottom: 20px; }
+    .blog-card-meta { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--txm); font-family: monospace; }
+    .blog-card-read { font-size: 13px; font-weight: 700; color: var(--acc); font-family: 'Space Grotesk', sans-serif; }
+    .blog-banner { height: 6px; }
+
     /* SVG Icons inline */
     .icon { width: 1em; height: 1em; display: inline-block; vertical-align: middle; }
 
@@ -369,6 +383,7 @@
         <button class="nav-link" data-page="projects" onclick="navigate('projects')">Projects</button>
         <button class="nav-link" data-page="community" onclick="navigate('community')">Community</button>
         <button class="nav-link" data-page="showcase" onclick="navigate('showcase')">Showcase</button>
+        <button class="nav-link" data-page="blog" onclick="navigate('blog')">Blog</button>
         <div class="nav-sep"></div>
         <button class="nav-theme" id="themeBtn" title="Toggle theme">☀️</button>
         <button class="nav-join" onclick="openModal()">Join Club</button>
@@ -383,6 +398,7 @@
       <button data-page="projects" onclick="navigate('projects')">Projects</button>
       <button data-page="community" onclick="navigate('community')">Community</button>
       <button data-page="showcase" onclick="navigate('showcase')">Showcase</button>
+      <button data-page="blog" onclick="navigate('blog')">Blog</button>
       <button class="join-btn" onclick="openModal(); toggleDrawer();">Join Club</button>
     </div>
   </nav>
@@ -634,6 +650,60 @@
     </section>
   </div>
 
+  <!-- ═══════ BLOG PAGE ═══════ -->
+  <div class="page" id="page-blog">
+    <section class="section" style="padding-top:96px">
+      <div class="wrap">
+        <div class="section-title reveal">
+          <h2>DataFWD <span>Blog</span></h2>
+          <p>Guides, insights, and strategies for data scientists who build in public.</p>
+        </div>
+        <div class="blog-grid">
+
+          <a href="/blog/data-science-portfolio-2026.html" class="blog-card reveal">
+            <div class="blog-banner" style="background:linear-gradient(90deg,#297AFF,#8AFF20)"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-tag">Career</div>
+              <div class="blog-card-title">How to Build a Data Science Portfolio That Gets You Hired in 2026</div>
+              <div class="blog-card-excerpt">A step-by-step guide to building a portfolio that stands out — with real projects, peer feedback, and a GitHub that hiring managers actually want to see.</div>
+              <div class="blog-card-meta">
+                <span>Apr 3, 2026 · 8 min read</span>
+                <span class="blog-card-read">Read →</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="/blog/data-science-team-sport.html" class="blog-card reveal">
+            <div class="blog-banner" style="background:linear-gradient(90deg,#8AFF20,#297AFF)"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-tag">Community</div>
+              <div class="blog-card-title">Why Data Science Is a Team Sport (And How to Find Your Squad)</div>
+              <div class="blog-card-excerpt">Solo projects won't cut it anymore. Here's why the top data scientists collaborate, review each other's work, and build together — and how you can do the same.</div>
+              <div class="blog-card-meta">
+                <span>Apr 3, 2026 · 6 min read</span>
+                <span class="blog-card-read">Read →</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="/blog/data-science-projects-recruiters.html" class="blog-card reveal">
+            <div class="blog-banner" style="background:linear-gradient(90deg,#a855f7,#297AFF)"></div>
+            <div class="blog-card-body">
+              <div class="blog-card-tag">Projects</div>
+              <div class="blog-card-title">5 Data Science Projects That Will Actually Stand Out to Recruiters</div>
+              <div class="blog-card-excerpt">Not all projects are equal. These 5 types consistently impress hiring managers — and most candidates are still ignoring them.</div>
+              <div class="blog-card-meta">
+                <span>Apr 3, 2026 · 7 min read</span>
+                <span class="blog-card-read">Read →</span>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
   <!-- ═══════ JOIN MODAL (Formspree) ═══════ -->
   <div class="modal-overlay" id="joinModal">
     <div class="modal-bg" onclick="closeModal()"></div>
@@ -662,7 +732,7 @@
           <div class="footer-desc">The global community and platform for the next generation of data leaders.</div>
           <div class="social-links"><a href="#" class="social-link">T</a><a href="#" class="social-link">G</a><a href="#" class="social-link">L</a><a href="#" class="social-link">D</a></div>
         </div>
-        <div class="footer-col"><h4>Platform</h4><span onclick="navigate('projects')">Projects</span><span onclick="navigate('community')">Community</span><span onclick="navigate('showcase')">Showcase</span></div>
+        <div class="footer-col"><h4>Platform</h4><span onclick="navigate('projects')">Projects</span><span onclick="navigate('community')">Community</span><span onclick="navigate('showcase')">Showcase</span><span onclick="navigate('blog')">Blog</span></div>
         <div class="footer-col"><h4>Resources</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Hiring Network</a></div>
       </div>
       <div class="footer-bottom">
